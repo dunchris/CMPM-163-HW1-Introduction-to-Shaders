@@ -1,4 +1,5 @@
-﻿Shader "CMPM131HW1/SphereShader"
+﻿//Displacement Shader
+Shader "CMPM131HW1/SphereShader"
 {
     Properties
     {
@@ -52,7 +53,7 @@
                 else
                 {   aRad = sinRad;
                     bRad = 0;}
-                //stretch y and z vertices
+                //stretch y and z vertices alternatively
                 float newx = v.vertex.x;
                 float newy = v.vertex.y + (v.vertex.y * _Stretch * aRad);
                 float newz = v.vertex.z + (v.vertex.z * _Stretch * -bRad);
@@ -61,7 +62,7 @@
                 
 
                 o.vertex = UnityObjectToClipPos(xyz);
-                o.normal = UnityObjectToWorldNormal(v.normal);
+                o.normal = UnityObjectToWorldNormal(v.normal); //always call this when dealing with mormals
                 return o;
             }
            

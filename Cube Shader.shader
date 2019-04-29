@@ -1,5 +1,7 @@
-﻿Shader "CMPM131HW1/Cube Shader"
+﻿//Phong Shader
+Shader "CMPM131HW1/Cube Shader"
 {
+	//This shader is also applied to a sphere, not just a cube
     Properties
     {
         _Color ("Color", Color) = (1,1,1,1)
@@ -58,6 +60,7 @@
 				const float PI = 3.14159;
 				float rad = fmod(_Time.y, PI *2.0);
 
+				//rotate the cube by the y axis
 				float3 rotatedVertex = mul(getRotationMatrixY(rad), v.vertex.xyz);
 				float4 xyz = float4(rotatedVertex, 1.0);
 

@@ -1,9 +1,9 @@
-﻿Shader "CMPM131HW1/Mosquito Shader"
+﻿//Image processing shader
+Shader "CMPM131HW1/Mosquito Shader"
 {
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
-		_NumCells ("Number of Cells", Float) = 1.0
 		_Intensity ("Intensity", range(1.0, 10)) = 1.0
     }
     SubShader
@@ -17,9 +17,8 @@
 
             #include "UnityCG.cginc"
             
-			uniform float _Size;
+			
             uniform float4 _MainTex_TexelSize; //special value
-			uniform float _NumCells;
             uniform int _Intensity;
 			uniform int _MouseButtonPressed;
 			uniform float _mX;
@@ -97,7 +96,6 @@
 				if (_Intensity < 1)
 					_Intensity = 1;
 
-				
 				return edgeCol * (_Intensity);
                
             }

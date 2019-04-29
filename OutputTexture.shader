@@ -30,7 +30,7 @@
 			};
 
 			sampler _MainTex;
-
+			//this is a normal vertex shader
 			v2f vert(appdata v)
 			{
 				v2f o;

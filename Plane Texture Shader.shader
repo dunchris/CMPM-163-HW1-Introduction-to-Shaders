@@ -6,8 +6,7 @@
     }
     SubShader
     {
-       
-		
+		//First of 2 passes
         LOD 100
 		Pass
 		{
@@ -40,6 +39,7 @@
 
 				const float PI = 3.14159;
 
+				//make the plane float along the y axis
 				float rad = fmod(_Time.y, PI *2.0);
 				float newx = v.vertex.x;
 				float newy = v.vertex.y + 0.25 * sin(rad);
@@ -59,6 +59,7 @@
 			}
 			ENDCG
 		}
+		//second pass for multiple point lights
         Pass
         {
 		Tags { "LightMode" = "ForwardAdd"}
@@ -92,7 +93,7 @@
 				
 				float rad = fmod(_Time.y, PI *2.0);
 				float newx = v.vertex.x;
-				float newy = v.vertex.y + 0.25 * sin(rad);
+				float newy = v.vertex.y + 0.25 * sin(rad); // make the plane float
 				float newz = v.vertex.z;
 
 				float4 xyz = float4(newx, newy, newz, 1.0);

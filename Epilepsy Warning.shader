@@ -1,11 +1,9 @@
-﻿Shader "Custom/RenderToTexture_CA"
+﻿Shader "Custom/Epilepsy_Warning" //Works in Unity, Not in player or WebGL
 {
 	Properties
 	{
 		_MainTex("Texture", 2D) = "white" {} 
-		_Color1("Live Color", Color) = (1,1,1,1)
-		_Color2("Dead Color", Color) = (1,1,1,1)
-		_Color3("Transition Color", Color) = (1,1,1,1)
+
     }
 	SubShader
 	{
@@ -21,9 +19,7 @@
 			#include "UnityCG.cginc"
             
             uniform float4 _MainTex_TexelSize;
-			uniform float4 _Color1;
-			uniform float4 _Color2;
-			uniform float4 _Color3;
+
 			struct appdata
 			{
 				float4 vertex : POSITION;
@@ -95,20 +91,20 @@
                     if (cnt == 2 || cnt == 3) {
                         //Any live cell with two or three live neighbours lives on to the next generation.
                 
-                        return _Color1; //float4(1.0,1.0,1.0,1.0)
+						return float4(1.0, 0.0, 0.0, 1.0); //_Color1;
                     } else {
                         //Any live cell with fewer than two live neighbours dies, as if caused by underpopulation.
                         //Any live cell with more than three live neighbours dies, as if by overpopulation.
 
-                        return _Color2; //float4(0.0,0.0,0.0,1.0);
+						return float4(0.0, 0.0, 1.0, 1.0); //_Color2;
                     }
                 } else { //cell is dead
-                    if (cnt == 2) {//Chris: Changing the count to 2 makes the texture behave in a noiselike fashion
+                    if (cnt == 2) {//Changing the count to 2 makes the texture behave in an epileptic fashion
                         //Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
 
-                        return _Color3; //float4(1.0,1.0,1.0,1.0);
+						return float4(1.0, 1.0, 1.0, 1.0); //_Color3;
                     } else {
-                        return _Color2; //float4(0.0,0.0,0.0,1.0);
+						return float4(0.0, 0.0, 1.0, 1.0); //_Color2;
 
                     }
                 }
@@ -119,5 +115,5 @@
 		}
 
 	}
-	FallBack "Diffuse"
+	//FallBack "Diffuse"
 }
